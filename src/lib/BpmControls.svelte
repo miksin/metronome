@@ -54,7 +54,7 @@
 <div class="flex flex-col items-center gap-4">
   <!-- Tempo label -->
   <div
-    class="text-sm font-medium tracking-widest text-gray-500 uppercase dark:text-gray-400"
+    class="text-sm font-medium tracking-widest text-muted uppercase"
   >
     {$tempoLabel}
   </div>
@@ -63,13 +63,13 @@
   <div class="flex items-center gap-3">
     <button
       onclick={() => adjustBPM(-10)}
-      class="h-10 w-10 rounded-full bg-gray-100 text-lg font-bold text-gray-600 transition-colors hover:bg-gray-200 active:scale-95 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+      class="h-10 w-10 rounded-full bg-elevated text-lg font-bold text-subtle transition-colors hover:bg-elevated-hover active:scale-95"
       aria-label="Decrease BPM by 10">-10</button
     >
 
     <button
       onclick={() => adjustBPM(-1)}
-      class="h-10 w-10 rounded-full bg-gray-100 text-xl font-bold text-gray-600 transition-colors hover:bg-gray-200 active:scale-95 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+      class="h-10 w-10 rounded-full bg-elevated text-xl font-bold text-subtle transition-colors hover:bg-elevated-hover active:scale-95"
       aria-label="Decrease BPM by 1">-</button
     >
 
@@ -85,24 +85,24 @@
         oninput={handleBpmInput}
         onblur={handleBpmBlur}
         onkeydown={handleKeydown}
-        class="w-24 [appearance:textfield] border-b-2 border-violet-400 bg-transparent text-center text-5xl font-bold text-gray-900 transition-colors outline-none focus:border-violet-600 dark:border-violet-500 dark:text-white dark:focus:border-violet-400 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        class="w-24 [appearance:textfield] border-b-2 border-accent bg-transparent text-center text-5xl font-bold text-default transition-colors outline-none focus:border-accent-hover [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
         aria-label="BPM value"
       />
       <span
-        class="mt-1 text-xs tracking-widest text-gray-400 uppercase dark:text-gray-500"
+        class="mt-1 text-xs tracking-widest text-faint uppercase"
         >BPM</span
       >
     </div>
 
     <button
       onclick={() => adjustBPM(1)}
-      class="h-10 w-10 rounded-full bg-gray-100 text-xl font-bold text-gray-600 transition-colors hover:bg-gray-200 active:scale-95 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+      class="h-10 w-10 rounded-full bg-elevated text-xl font-bold text-subtle transition-colors hover:bg-elevated-hover active:scale-95"
       aria-label="Increase BPM by 1">+</button
     >
 
     <button
       onclick={() => adjustBPM(10)}
-      class="h-10 w-10 rounded-full bg-gray-100 text-lg font-bold text-gray-600 transition-colors hover:bg-gray-200 active:scale-95 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+      class="h-10 w-10 rounded-full bg-elevated text-lg font-bold text-subtle transition-colors hover:bg-elevated-hover active:scale-95"
       aria-label="Increase BPM by 10">+10</button
     >
   </div>
@@ -114,13 +114,13 @@
     max="300"
     step="1"
     bind:value={$bpm}
-    class="h-2 w-full max-w-xs cursor-pointer rounded-full accent-violet-500"
+    class="h-2 w-full max-w-xs cursor-pointer rounded-full accent-accent"
     aria-label="BPM slider"
   />
 
   <!-- Beats per measure -->
   <div class="mt-2 flex items-center gap-3">
-    <span class="text-sm text-gray-500 dark:text-gray-400"
+    <span class="text-sm text-muted"
       >Beats per measure:</span
     >
     <div class="flex gap-1">
@@ -129,8 +129,8 @@
           onclick={() => beatsPerMeasure.set(n)}
           class="h-8 w-8 rounded text-sm font-medium transition-colors {$beatsPerMeasure ===
           n
-            ? 'bg-violet-500 text-white'
-            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'}"
+            ? 'bg-accent text-white'
+            : 'bg-elevated text-subtle hover:bg-elevated-hover'}"
           >{n}</button
         >
       {/each}

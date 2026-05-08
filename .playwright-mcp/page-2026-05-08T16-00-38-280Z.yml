@@ -1,0 +1,33 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - heading "Metronome" [level=1] [ref=e5]
+  - main [ref=e6]:
+    - button "Start metronome" [ref=e16]: Start
+    - generic [ref=e18]:
+      - generic [ref=e19]: Moderato
+      - generic [ref=e20]:
+        - button "Decrease BPM by 10" [ref=e21]: "-10"
+        - button "Decrease BPM by 1" [ref=e22]: "-"
+        - generic [ref=e23]:
+          - spinbutton "BPM value" [ref=e24]: "120"
+          - generic [ref=e25]: BPM
+        - button "Increase BPM by 1" [ref=e26]: +
+        - button "Increase BPM by 10" [ref=e27]: "+10"
+      - slider "BPM slider" [ref=e28] [cursor=pointer]: "120"
+      - generic [ref=e29]:
+        - generic [ref=e30]: "Beats per measure:"
+        - generic [ref=e31]:
+          - button "2" [ref=e32]
+          - button "3" [ref=e33]
+          - button "4" [ref=e34]
+          - button "6" [ref=e35]
+          - button "8" [ref=e36]
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - heading "Presets" [level=2] [ref=e40]
+        - button "+ Save current" [ref=e41]
+      - generic [ref=e42]:
+        - button "Largo (60)" [ref=e44]
+        - button "Moderato (120)" [ref=e46]
+        - button "Presto (180)" [ref=e48]
+  - contentinfo [ref=e49]: Built with Svelte + Web Audio API

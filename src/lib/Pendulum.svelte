@@ -43,9 +43,9 @@
       class="h-4 w-4 rounded-full border-2 transition-all duration-75 {activeBeat ===
       i
         ? activeBeat === 0
-          ? 'scale-125 border-amber-400 bg-amber-400'
-          : 'scale-125 border-violet-500 bg-violet-500'
-        : 'border-gray-400 bg-transparent dark:border-gray-600'}"
+          ? 'scale-125 border-beat bg-beat'
+          : 'scale-125 border-accent bg-accent'
+        : 'border-border-muted bg-transparent'}"
     ></div>
   {/each}
 </div>
@@ -54,7 +54,7 @@
 <div class="relative flex h-52 items-start justify-center select-none">
   <!-- Pivot point -->
   <div
-    class="absolute top-0 left-1/2 z-10 h-4 w-4 -translate-x-1/2 rounded-full bg-gray-500"
+    class="absolute top-0 left-1/2 z-10 h-4 w-4 -translate-x-1/2 rounded-full bg-elevated-muted"
   ></div>
 
   <!-- Arm + bob -->
@@ -77,10 +77,10 @@
       class="absolute left-1/2 -translate-x-1/2 rounded-full {running &&
       flash &&
       isAccent
-        ? 'bg-amber-400'
+        ? 'bg-beat'
         : running && flash
-          ? 'bg-violet-500'
-          : 'bg-gray-400 dark:bg-gray-500'} transition-colors duration-75"
+          ? 'bg-accent'
+          : 'bg-faint'} transition-colors duration-75"
       style="width: 3px; height: 160px; top: 0;"
     ></div>
     <!-- Bob (weight at bottom) -->
@@ -88,10 +88,10 @@
       class="absolute left-1/2 h-8 w-8 -translate-x-1/2 rounded-full border-2 transition-all duration-75 {running &&
       flash &&
       isAccent
-        ? 'border-amber-300 bg-amber-400 shadow-lg shadow-amber-400/50'
+        ? 'border-beat bg-beat shadow-lg shadow-glow-beat'
         : running && flash
-          ? 'border-violet-400 bg-violet-500 shadow-lg shadow-violet-500/50'
-          : 'border-gray-400 bg-gray-300 dark:border-gray-500 dark:bg-gray-600'}"
+          ? 'border-accent bg-accent shadow-lg shadow-glow-accent'
+          : 'border-border-muted bg-elevated-muted'}"
       style="top: 148px;"
     ></div>
   </div>

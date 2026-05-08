@@ -48,7 +48,7 @@
 <div class="w-full">
   <div class="mb-3 flex items-center justify-between">
     <h2
-      class="text-sm font-semibold tracking-widest text-gray-500 uppercase dark:text-gray-400"
+      class="text-sm font-semibold tracking-widest text-muted uppercase"
     >
       Presets
     </h2>
@@ -57,7 +57,7 @@
         showAddForm = !showAddForm;
         newPresetName = "";
       }}
-      class="rounded bg-violet-100 px-2 py-1 text-xs text-violet-700 transition-colors hover:bg-violet-200 dark:bg-violet-900/40 dark:text-violet-300 dark:hover:bg-violet-800/60"
+      class="rounded bg-accent-soft px-2 py-1 text-xs text-default transition-colors hover:bg-accent-soft-hover"
     >
       {showAddForm ? "Cancel" : "+ Save current"}
     </button>
@@ -71,12 +71,12 @@
         onkeydown={handleKeydown}
         placeholder="Preset name..."
         maxlength="30"
-        class="flex-1 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-900 placeholder-gray-400 focus:border-violet-500 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:focus:border-violet-400"
+        class="flex-1 rounded-lg border border-border-strong bg-content px-3 py-1.5 text-sm text-default placeholder-faint focus:border-accent focus:outline-none"
       />
       <button
         onclick={saveCurrentAsPreset}
         disabled={!newPresetName.trim()}
-        class="rounded-lg bg-violet-500 px-3 py-1.5 text-sm text-white transition-colors hover:bg-violet-600 disabled:cursor-not-allowed disabled:opacity-40"
+        class="rounded-lg bg-accent px-3 py-1.5 text-sm text-white transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-40"
         >Save</button
       >
     </div>
@@ -89,8 +89,8 @@
           onclick={() => applyPreset(preset)}
           class="rounded-lg border px-3 py-1.5 text-sm transition-colors {$bpm ===
             preset.bpm && $beatsPerMeasure === preset.beatsPerMeasure
-            ? 'border-violet-500 bg-violet-500 text-white'
-            : 'border-gray-200 bg-white text-gray-700 hover:border-violet-400 hover:text-violet-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-violet-500 dark:hover:text-violet-400'}"
+            ? 'border-accent bg-accent text-white'
+            : 'border-border-strong bg-content text-default hover:border-accent hover:text-accent'}"
         >
           <span class="font-medium">{preset.name}</span>
           {#if !preset.id.startsWith("default-")}
@@ -102,8 +102,8 @@
             onclick={() => handleDeleteClick(preset.id)}
             class="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full text-xs leading-none opacity-0 transition-opacity group-hover:opacity-100 {confirmDeleteId ===
             preset.id
-              ? 'bg-red-500 text-white'
-              : 'bg-gray-300 text-gray-600 dark:bg-gray-600 dark:text-gray-300'}"
+              ? 'bg-danger text-white'
+              : 'bg-elevated-muted text-subtle'}"
             title={confirmDeleteId === preset.id
               ? "Click again to confirm"
               : "Delete preset"}>×</button
