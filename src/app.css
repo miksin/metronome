@@ -75,39 +75,6 @@
   --color-border-muted: #FCCCC0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-surface: #2D2420;
-    --color-content: #3A2C28;
-    --color-elevated: #483530;
-    --color-elevated-hover: #544038;
-    --color-elevated-muted: #665048;
-
-    --color-default: #FFF5F0;
-    --color-subtle: #FFE8E0;
-    --color-muted: #FFD5C8;
-    --color-faint: #F0B8A8;
-
-    --color-accent: #FF8FAB;
-    --color-accent-hover: #FF7A9A;
-    --color-accent-soft: rgba(255, 122, 154, 0.15);
-    --color-accent-soft-hover: rgba(255, 122, 154, 0.3);
-
-    --color-beat: #FF99B5;
-
-    --color-danger: #E88383;
-    --color-danger-hover: #D46A6A;
-
-    --color-glow-accent: rgba(255, 143, 171, 0.3);
-    --color-glow-danger: rgba(232, 131, 131, 0.3);
-    --color-glow-beat: rgba(255, 153, 181, 0.5);
-
-    --color-border: #3A2C28;
-    --color-border-strong: #483530;
-    --color-border-muted: #665048;
-  }
-}
-
 body {
   margin: 0;
 }
