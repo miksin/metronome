@@ -1,8 +1,14 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { isRunning, toggleMetronome, bpm } from "./lib/metronomeStore";
+  import { metronomeEngine } from "./lib/metronomeEngine";
   import Pendulum from "./lib/Pendulum.svelte";
   import BpmControls from "./lib/BpmControls.svelte";
   import Presets from "./lib/Presets.svelte";
+
+  onMount(() => {
+    metronomeEngine.preload();
+  });
 </script>
 
 <div

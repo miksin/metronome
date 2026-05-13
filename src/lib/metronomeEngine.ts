@@ -1,6 +1,7 @@
 /**
  * Metronome audio engine using Web Audio API with precise scheduling.
  * Uses the "lookahead scheduler" pattern to avoid timing drift.
+ * Plays separate WAV samples for accent vs normal beats.
  */
 
 export type BeatType = "accent" | "normal";
@@ -13,11 +14,25 @@ export interface ScheduledBeat {
 
 export type BeatCallback = (beat: ScheduledBeat) => void;
 
-const SCHEDULE_AHEAD_TIME = 0.1; // seconds to schedule ahead
-const LOOKAHEAD_INTERVAL = 25; // ms between scheduler calls
+const SCHEDULE_AHEAD_TIME = 0.1;
+const LOOKAHEAD_INTERVAL = 25;
+
+const SAMPLE_FILES = {
+  accent: "/click_accent.wav",
+  normal: "/click_normal.wav",
+} as const;
+
+async function decodeAudio(ctx: AudioContext, url: string): Promise<AudioBuffer> {
+  const response = await fetch(url);
+  const arrayBuffer = await response.arrayBuffer();
+  return ctx.decodeAudioData(arrayBuffer);
+}
 
 export class MetronomeEngine {
   private audioCtx: AudioContext | null = null;
+  private accentBuffer: AudioBuffer | null = null;
+  private normalBuffer: AudioBuffer | null = null;
+  private loading = false;
   private nextBeatTime = 0;
   private currentBeat = 0;
   private schedulerTimer: ReturnType<typeof setInterval> | null = null;
@@ -44,29 +59,38 @@ export class MetronomeEngine {
     return this.audioCtx;
   }
 
+  preload() {
+    this.loadSamples();
+  }
+
+  private async loadSamples() {
+    if (this.loading) return;
+    this.loading = true;
+    try {
+      const ctx = this.getAudioContext();
+      const [accent, normal] = await Promise.all([
+        decodeAudio(ctx, SAMPLE_FILES.accent),
+        decodeAudio(ctx, SAMPLE_FILES.normal),
+      ]);
+      this.accentBuffer = accent;
+      this.normalBuffer = normal;
+    } catch (e) {
+      console.error("Failed to load click samples:", e);
+    } finally {
+      this.loading = false;
+    }
+  }
+
   private scheduleClick(time: number, isAccent: boolean) {
     const ctx = this.getAudioContext();
+    const buffer = isAccent ? this.accentBuffer : this.normalBuffer;
+    if (!buffer) return;
 
-    const osc = ctx.createOscillator();
-    const gainNode = ctx.createGain();
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
 
-    osc.connect(gainNode);
-    gainNode.connect(ctx.destination);
-
-    if (isAccent) {
-      // Higher pitched accent for beat 1
-      osc.frequency.setValueAtTime(1200, time);
-      gainNode.gain.setValueAtTime(1.0, time);
-    } else {
-      osc.frequency.setValueAtTime(800, time);
-      gainNode.gain.setValueAtTime(0.6, time);
-    }
-
-    // Short click envelope
-    gainNode.gain.exponentialRampToValueAtTime(0.001, time + 0.05);
-
-    osc.start(time);
-    osc.stop(time + 0.05);
+    source.connect(ctx.destination);
+    source.start(time);
   }
 
   private schedule() {
@@ -86,7 +110,6 @@ export class MetronomeEngine {
           beatNumber,
           type: isAccent ? "accent" : "normal",
         };
-        // Fire callback slightly before the beat for UI sync
         const delay = (scheduledTime - ctx.currentTime) * 1000;
         setTimeout(
           () => {
